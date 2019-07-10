@@ -1,8 +1,9 @@
 from sqlalchemy.sql import func
 from werkzeug.security import check_password_hash, generate_password_hash
-from project import db
+from project import db, login
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(UserMixin, db.Model):
   __tablename__ = 'users'
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   username = db.Column(db.String(128), nullable=False)
@@ -18,3 +19,7 @@ class User(db.Model):
 
   def __repr__(self):
     return '<User {}>'.format(self.username)
+
+@login.user_loader
+def load_user(id):
+  return User.query.get(int(id))
