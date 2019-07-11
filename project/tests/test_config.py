@@ -19,6 +19,10 @@ class TestDevelopmentConfig(TestCase):
     self.assertTrue(
       app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('DATABASE_URL')
     )
+    self.assertTrue(
+      app.config['MAIL_SERVER'] == os.environ.get('MAIL_SERVER') and \
+        app.config['MAIL_PORT'] == int(os.environ.get('MAIL_PORT'))
+    )
 
 class TestTestingConfig(TestCase):
   def create_app(self):

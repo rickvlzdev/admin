@@ -25,9 +25,11 @@ def test():
 @cli.command('seed_db')
 def seed_db():
   """Seeds the database."""
-  michael = User(username='michael', email='michael@gmail.com')
+  michael = User(username='michael123', email='michael@gmail.com',
+    first_name='michael', last_name='james')
   michael.set_password('michael_password')
-  martha = User(username='martha', email='marth@yahoo.com')
+  martha = User(username='martha345', email='martha@yahoo.com',
+    first_name='martha', last_name='lopez')
   martha.set_password('martha_password')
   db.session.add(michael)
   db.session.add(martha)

@@ -1,21 +1,28 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<h1>Login view</h1>
-<form action="" method="POST">
-  {{ form.hidden_tag() }}
-  <div>
-    {{ form.username.label }}
-    {{ form.username(placeholder="username") }}
+<div class="row justify-content-center pt-5">
+  <div class="col-md-8">
+    <h1>Login view</h1>
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username(class="form-control", placeholder="username") }}
+      </div>
+      <div class="form-group">
+        {{ form.password.label }}
+        {{ form.password(class="form-control", placeholder="password") }}
+      </div>
+      <div class="form-group form-check">
+        {{ form.remember_me(class="form-check-input") }}
+        {{ form.remember_me.label(class="form-check-label") }}
+      </div>
+      <p>
+        <a href="{{ url_for('auth.request_password_reset') }}">Forgot you password?</a>
+      </p>
+      {{ form.submit(class="btn btn-primary mt-3") }}
+    </form>
   </div>
-  <div>
-    {{ form.password.label }}
-    {{ form.password(placeholder="password") }}
-  </div>
-  <div>
-    {{ form.remember_me.label }}
-    {{ form.remember_me() }}
-  </div>
-  {{ form.submit() }}
-</form>
+</div>
 {% endblock %}

@@ -9,6 +9,10 @@ class BaseConfig:
 class DevelopmentConfig(BaseConfig):
   """Development configuration"""
   SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+  MAIL_SERVER = os.environ.get('MAIL_SERVER')
+  MAIL_PORT = int(os.environ.get('MAIL_PORT'))
+  MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
+  ADMINS = ['johndoe@admin.com']
 
 class TestingConfig(BaseConfig):
   """Testing configuration"""

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-md-8">
+    <h1>Register</h1>
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username(class="form-control", placeholder="enter username") }}
+        {% if form.username.errors %}
+        {% for error in form.username.errors %}
+          <span>{{ error }}</span>
+        {% endfor %}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(class="form-control", placeholder="enter email") }}
+        {% if form.email.errors %}
+        {% for error in form.email.errors %}
+          <span>{{ error }}</span>
+        {% endfor %}
+        {% endif %}
+      </div>
+      <div class="form-row">
+        <div class="col">
+          {{ form.password.label }}
+          {{ form.password(class="form-control", placeholder="enter password") }}
+          {% if form.password.errors %}
+          {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+          {% endif %}
+        </div>
+        <div class="col">
+          {{ form.password_repeat.label }}
+          {{ form.password_repeat(class="form-control", placeholder="enter password again") }}
+          {% if form.password_repeat.errors %}
+          {% for error in form.password_repeat.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      {{ form.submit(class="btn btn-primary mt-3") }}
+    </form>
+  </div>
+</div>
+{% endblock %}
