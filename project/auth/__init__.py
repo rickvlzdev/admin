@@ -51,7 +51,7 @@ def request_password_reset():
     user = User.query.filter_by(email=form.email.data).first()
     if user:
       send_password_reset_email(user)
-    flash('Check your email for the instructions to reset your password.')
+    flash('Check your email for the instructions to reset your password. Make sure to check your spam folder.')
     return redirect(url_for('auth.login'))
   elif request.method == 'POST':
     flash('Invalid email address.', 'error')
