@@ -15,7 +15,7 @@ def login():
   if form.validate_on_submit():
     user = User.query.filter_by(username=form.username.data).first()
     if user is None or not user.check_password(form.password.data):
-      flash('Invalid username or password.')
+      flash('Invalid username or password.', 'error')
       return render_template('login.html', form=form)
     login_user(user, remember=form.remember_me.data)
     return redirect(url_for('main.index'))
@@ -39,7 +39,7 @@ def register():
     flash('Successful registration. Please sign in.')
     return redirect(url_for('auth.login'))
   elif request.method == 'POST':
-    flash('Invalid information.')
+    flash('Invalid information.', 'error')
   return render_template('register.html', form=form)
 
 @bp.route('/request_password_reset', methods=['GET', 'POST'])
@@ -53,6 +53,8 @@ def request_password_reset():
       send_password_reset_email(user)
     flash('Check your email for the instructions to reset your password.')
     return redirect(url_for('auth.login'))
+  elif request.method == 'POST':
+    flash('Invalid email address.', 'error')
   return render_template('request_password_reset.html', form=form)
 
 @bp.route('/reset_password/<token>', methods=['GET', 'POST'])

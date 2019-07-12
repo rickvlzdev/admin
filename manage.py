@@ -1,5 +1,6 @@
 import sys
 import unittest
+import seed_data
 from flask.cli import FlaskGroup
 from project import create_app, db
 from project.models import User
@@ -26,10 +27,12 @@ def test():
 def seed_db():
   """Seeds the database."""
   michael = User(username='michael123', email='michael@gmail.com',
-    first_name='michael', last_name='james')
+    first_name='michael', last_name='james',
+    about_me=seed_data.about_me)
   michael.set_password('michael_password')
   martha = User(username='martha345', email='martha@yahoo.com',
-    first_name='martha', last_name='lopez')
+    first_name='martha', last_name='lopez',
+    about_me=seed_data.about_me)
   martha.set_password('martha_password')
   db.session.add(michael)
   db.session.add(martha)

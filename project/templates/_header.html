@@ -1,36 +1,20 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Admin</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Admin <i class="fa fa-user mx-2"></i></a>
+    {% if current_user.is_anonymous %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        {% if current_user.is_anonymous %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('auth.login') }}">Sign in</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
         </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ url_for('main.profile') }}" class="nav-link">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ url_for('main.edit_profile') }}" class="nav-link">Edit profile</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ url_for('main.change_password') }}" class="nav-link">Change password</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('auth.logout') }}">Sign out</a>
-        </li>
-        {% endif %}
       </ul>
     </div>
+    {% endif %}
   </nav>
 </header>

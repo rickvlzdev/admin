@@ -1,29 +1,96 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<div class="row">
-  <div class="col">
-    <h1>Edit Profile</h1>
-    <form action="" method="POST">
-      {{ form.hidden_tag() }}
-      <div class="form-group">
-        {{ form.first_name.label }}
-        {{ form.first_name(class="form-control", value=current_user.first_name, placeholder="enter first name") }}
-      </div>
-      <div class="form-group">
-        {{ form.last_name.label }}
-        {{ form.last_name(class="form-control", value=current_user.last_name, placeholder="enter last name") }}
-      </div>
-      <div class="form-group">
-        {{ form.username.label }}
-        {{ form.username(class="form-control", value=current_user.username, placeholder="enter username") }}
-      </div>
-      <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(class="form-control", value=current_user.email, placeholder="enter email") }}
-      </div>
-      {{ form.submit(class="btn btn-primary") }}
-    </form>
+<div class="row justify-content-center mt-5">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div class="border rounded p-4">
+      <h1 class="font-weight-normal mb-4 h3">Edit Profile</h1>
+      <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group mb-4 pb-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                First name
+              </div>
+            </div>
+            {% if current_user.first_name %}
+            {{ form.first_name(class="form-control", value=current_user.first_name, placeholder="first name") }}
+            {% else %}
+            {{ form.first_name(class="form-control", placeholder="first name") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group mb-4 pb-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                Last name
+              </div>
+            </div>
+            {% if current_user.last_name %}
+            {{ form.last_name(class="form-control", value=current_user.last_name, placeholder="last name") }}
+            {% else %}
+            {{ form.last_name(class="form-control", placeholder="last name") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-xs-12 col-md mb-4">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-user"></i>
+                </div>
+              </div>
+              {% if form.username.errors %}
+              {{ form.username(class="form-control is-invalid", value=current_user.username, placeholder="username") }}
+              {% for error in form.username.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+              {% endfor %}
+              {% else %}
+              {{ form.username(class="form-control", value=current_user.username, placeholder="username") }}
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-xs-12 col-md mb-4">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-envelope"></i>
+                </div>
+              </div>
+              {% if form.email.errors %}
+              {{ form.email(class="form-control is-invalid", value=current_user.email, placeholder="email address") }}
+              {% for error in form.email.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+              {% endfor %}
+              {% else %}
+              {{ form.email(class="form-control", value=current_user.email, placeholder="email address") }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.about_me.label(class="text-muted") }}
+          {% if form.about_me.errors %}
+          <textarea class="form-control is-invalid" name="about_me" id="about_me" rows="4" placeholder="write something...">{% if current_user.about_me %}{{ current_user.about_me }}{% endif %}</textarea>
+          {% for error in form.about_me.errors %}
+          <div class="invalid-feedback">
+            {{ error }}
+          </div>
+          {% endfor %}
+          {% else %}
+          <textarea class="form-control" name="about_me" id="about_me" rows="4" placeholder="write something...">{% if current_user.about_me %}{{ current_user.about_me }}{% endif %}</textarea>
+          {% endif %}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}

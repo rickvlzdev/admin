@@ -2,50 +2,92 @@
 
 {% block app_content %}
 <div class="row justify-content-center mt-5">
-  <div class="col-md-8">
-    <h1>Register</h1>
-    <form action="" method="POST">
-      {{ form.hidden_tag() }}
-      <div class="form-group">
-        {{ form.username.label }}
-        {{ form.username(class="form-control", placeholder="enter username") }}
-        {% if form.username.errors %}
-        {% for error in form.username.errors %}
-          <span>{{ error }}</span>
-        {% endfor %}
-        {% endif %}
-      </div>
-      <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(class="form-control", placeholder="enter email") }}
-        {% if form.email.errors %}
-        {% for error in form.email.errors %}
-          <span>{{ error }}</span>
-        {% endfor %}
-        {% endif %}
-      </div>
-      <div class="form-row">
-        <div class="col">
-          {{ form.password.label }}
-          {{ form.password(class="form-control", placeholder="enter password") }}
-          {% if form.password.errors %}
-          {% for error in form.password.errors %}
-            <span>{{ error }}</span>
-          {% endfor %}
-          {% endif %}
+  <div class="col-sm-10 col-md-8 col-lg-6">
+    <div class="border rounded p-4">
+      <h1 class="font-weight-normal mb-4 h3">Register</h1>
+      <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group mb-4 pb-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-user"></i>
+              </div>
+            </div>
+            {% if form.username.errors %}
+            {{ form.username(class="form-control is-invalid", placeholder="username") }}
+            {% for error in form.username.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+            {% endfor %}
+            {% else %}
+            {{ form.username(class="form-control", placeholder="username") }}
+            {% endif %}
+          </div>
         </div>
-        <div class="col">
-          {{ form.password_repeat.label }}
-          {{ form.password_repeat(class="form-control", placeholder="enter password again") }}
-          {% if form.password_repeat.errors %}
-          {% for error in form.password_repeat.errors %}
-            <span>{{ error }}</span>
-          {% endfor %}
-          {% endif %}
+        <div class="form-group mb-4 pb-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-envelope"></i>
+              </div>
+            </div>
+            {% if form.email.errors %}
+            {{ form.email(class="form-control is-invalid", placeholder="email address") }}
+            {% for error in form.email.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+            {% endfor %}
+            {% else %}
+            {{ form.email(class="form-control", placeholder="email address") }}
+            {% endif %}
+          </div>
         </div>
-      </div>
-      {{ form.submit(class="btn btn-primary mt-3") }}
-    </form>
+        <div class="form-row pb-2">
+          <div class="col-xs-12 col-md mb-4">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-lock"></i>
+                </div>
+              </div>
+              {% if form.password.errors %}
+              {{ form.password(class="form-control is-invalid", placeholder="password") }}
+              {% for error in form.password.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+              {% endfor %}
+              {% else %}
+              {{ form.password(class="form-control", placeholder="password") }}
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-xs-12 col-md mb-4">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-lock"></i>
+                </div>
+              </div>
+              {% if form.password_repeat.errors %}
+              {{ form.password_repeat(class="form-control is-invalid", placeholder="confirm password") }}
+              {% for error in form.password_repeat.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+              {% endfor %}
+              {% else %}
+              {{ form.password_repeat(class="form-control", placeholder="confirm password") }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}
