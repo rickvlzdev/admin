@@ -5,3 +5,4 @@ Dockerfile-prod
 .vscode
 .git
 .gitignore
+README.md
