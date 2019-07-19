@@ -6,3 +6,5 @@ Flask-Login==0.4.1
 Flask-WTF==0.14.2
 Flask-Mail==0.9.1
 PyJWT==1.7.1
+gunicorn==19.9.0
+flake8===3.7.7
